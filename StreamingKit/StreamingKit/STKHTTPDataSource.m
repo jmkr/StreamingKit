@@ -35,6 +35,8 @@
 #import "STKHTTPDataSource.h"
 #import "STKLocalFileDataSource.h"
 
+#import "AudioManager.h"
+
 @interface STKHTTPDataSource()
 {
 @private
@@ -283,6 +285,11 @@
 			return;
 		}
 		
+#pragma mark - SCPR overrides for StreamingKit
+        SCPRDebugLog(@"reconnect URL!! %@", url);
+        url = [NSURL URLWithString:[[AudioManager shared] liveStreamURL]];
+        SCPRDebugLog(@"reconnect URL -- NOW!! %@", url);
+        
         self->currentUrl = url;
 
         if (url == nil)
